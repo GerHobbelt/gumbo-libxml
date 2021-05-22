@@ -65,6 +65,10 @@ static void delete_nodes(xmlDocPtr doc, const char* xpath_expr) {
   xmlXPathFreeContext(xpath_ctx);
 }
 
+#if defined(BUILD_MONOLITHIC)
+#define main(cnt, arr)      gumbo_libxml_example_main(cnt, arr)
+#endif
+
 int main(int argc, const char** argv) {
   if (argc != 2) {
     printf("Usage: get_title <html filename>.\n");
@@ -93,4 +97,6 @@ int main(int argc, const char** argv) {
   // Etc, this is not an exhaustive HTML scrubber.
   xmlSaveFormatFile("-", doc, 1);
   xmlFreeDoc(doc);
+
+  return EXIT_SUCCESS;
 }

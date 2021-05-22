@@ -43,7 +43,7 @@ static xmlNodePtr convert_node(
         // Tag name & namespace.
         xmlNsPtr namespace = NULL;
 
-        char *elementName = gumbo_normalized_tagname(elem->tag);
+        const char *elementName = gumbo_normalized_tagname(elem->tag);
         if (strlen(elementName) > 0) {
             result = xmlNewNode(NULL, BAD_CAST elementName);
         } else {
