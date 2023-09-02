@@ -103,11 +103,12 @@ xmlDocPtr gumbo_libxml_parse_with_options(
   GumboDocument* doctype = & output->document->v.document;
   const char* system_id = doctype->system_identifier;
   const char* public_id = doctype->public_identifier;
-  xmlDocPtr doc;
 
-  if (system_id && !*system_id) system_id = NULL;
-  if (public_id && !*public_id) public_id = NULL;
-  doc = htmlNewDoc(BAD_CAST system_id, BAD_CAST public_id);
+  if (system_id && !*system_id) 
+    system_id = NULL;
+  if (public_id && !*public_id) 
+    public_id = NULL;
+  xmlDocPtr doc = htmlNewDoc(BAD_CAST system_id, BAD_CAST public_id);
 
   GumboVector* children = &output->document->v.element.children;
   for (unsigned int i = 0; i < children->length; i++) {
