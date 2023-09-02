@@ -33,6 +33,7 @@ static void read_file(FILE* fp, char** output, int* length) {
   while ((bytes_read = fread(*output + start, 1, *length - start, fp))) {
     start += bytes_read;
   }
+  (*output)[*length] = '\0';
 }
 
 static void delete_nodes(xmlDocPtr doc, const char* xpath_expr) {
@@ -57,6 +58,8 @@ static void delete_nodes(xmlDocPtr doc, const char* xpath_expr) {
   // http://www.xmlsoft.org/examples/xpath2.c
   for (int i = xpath_obj->nodesetval->nodeNr - 1; i >= 0; i--) {
     xmlNodePtr node = xpath_obj->nodesetval->nodeTab[i];
+    if (node->type != XML_NAMESPACE_DECL)
+      xpath_obj->nodesetval->nodeTab[i] = NULL;
     xmlUnlinkNode(node);
     xmlFreeNode(node);
   }
@@ -86,6 +89,7 @@ int main(int argc, const char** argv) {
   int input_length;
   read_file(fp, &input, &input_length);
   xmlDocPtr doc = gumbo_libxml_parse(input);
+  free(input);
   delete_nodes(doc, "//script");
   delete_nodes(doc, "//style");
   delete_nodes(doc, "//link[@rel='stylesheet']");
