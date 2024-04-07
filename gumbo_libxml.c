@@ -30,7 +30,7 @@ static const char* kLegalXmlns[] = {
 
 static xmlNodePtr convert_node(
   xmlDocPtr doc, GumboNode* node) {
-  xmlNodePtr result;
+  xmlNodePtr result = NULL;
   switch (node->type) {
     case GUMBO_NODE_DOCUMENT:
       assert(false &&
