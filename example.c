@@ -42,7 +42,7 @@ static void delete_nodes(xmlDocPtr doc, const char* xpath_expr) {
     fprintf(stderr, "Error: unable to create new XPath context.\n");
     return;
   }
-  xmlXPathObjectPtr xpath_obj = xmlXPathEvalExpression(xpath_expr, xpath_ctx);
+  xmlXPathObjectPtr xpath_obj = xmlXPathEvalExpression((const xmlChar *)xpath_expr, xpath_ctx);
   if (xpath_obj == NULL) {
     fprintf(stderr, "Error: unable to create new XPath context.\n");
     xmlXPathFreeContext(xpath_ctx);
