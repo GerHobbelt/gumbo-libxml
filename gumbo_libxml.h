@@ -32,6 +32,13 @@ xmlDocPtr gumbo_libxml_parse(const char* buffer);
 xmlDocPtr gumbo_libxml_parse_with_options(
     GumboOptions*, const char* buffer, size_t buffer_length);
 
+
+#if defined(BUILD_MONOLITHIC)
+
+int gumbo_libxml_example_main(int argc, const char** argv);
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif
